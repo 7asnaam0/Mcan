@@ -1,0 +1,22 @@
+﻿@inject MCan.Services.JsonLocalizationService Localizer
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+
+@{
+    var isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    var dir = isArabic ? "rtl" : "ltr";
+    var textAlign = isArabic ? "text-end" : "text-start";
+}
+
+<div class="container" dir="@dir">
+    <div class="copyright text-center @textAlign">
+        <p>@Localizer.Get("footer.copyright.text1")</p>
+
+    </div>
+        <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+        </div>
+    </div>
+

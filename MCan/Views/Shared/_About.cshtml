@@ -1,0 +1,173 @@
+﻿@inject MCan.Services.JsonLocalizationService Localizer
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+
+<style>
+    .hero-stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .stat-item {
+        background-color: var(--surface-color);
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        padding: 2.5rem 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: default;
+    }
+
+        .stat-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(232, 117, 50, 0.2);
+        }
+
+    .stat-number {
+        font-size: 3.2rem;
+        font-weight: 800;
+        color: var(--accent-color);
+        display: block;
+        margin-bottom: 0.4rem;
+        position: relative;
+    }
+
+        .stat-number::after {
+            content: "";
+            font-size: 2rem;
+            position: absolute;
+            right: -1.2rem;
+            top: 0.1rem;
+            color: var(--accent-color);
+        }
+
+    .stat-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--heading-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    [dir="rtl"] .about-content {
+        font-family: 'Tajawal', sans-serif;
+        text-align: right;
+    }
+
+    [dir="rtl"] .stat-label {
+        font-size: 1.1rem;
+    }
+
+</style>
+
+<div class="container section-title" data-aos="fade-up">
+    <h2>@Localizer.Get("about.sectionTitle")</h2>
+    <div class="title-shape">
+        <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+    </div>
+    <p>@Localizer.Get("about.sectionDescription")</p>
+</div>
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "flex-row-reverse rtl" : "")">
+
+        <div class="col-lg-6 position-relative" data-aos="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "fade-left" : "fade-right flex-row-reverse rtl")" data-aos-delay="200">
+            <div class="about-image">
+                <img src="~/Images/About.jpg" alt="Company Image" class="img-fluid rounded-4">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="col-lg-6" data-aos="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "fade-right rtl flex-row-reverse  " : "fade-left")" data-aos-delay="300">
+            <div class="about-content">
+                <h6 class="subtitle">@Localizer.Get("about.whoWeAre")</h6>
+                <h2>@Localizer.Get("about.mainHeading")</h2>
+                <p class="lead mb-4">
+                    @Localizer.Get("about.leadParagraph")
+                </p>
+                <p class="mb-4">
+                    @Localizer.Get("about.secondParagraph")
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center text-center hero-stats" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-12 col-md-3 stat-item">
+            <span class="stat-number" data-target="3" data-speed="1200">0</span>
+            <span class="stat-label">@Localizer.Get("about.stats.yearsExperience")</span>
+        </div>
+        <div class="col-12 col-md-3 stat-item">
+            <span class="stat-number" data-target="20" data-speed="800">0</span>
+            <span class="stat-label">@Localizer.Get("about.stats.projectsCompleted")</span>
+        </div>
+        <div class="col-12 col-md-3 stat-item">
+            <span class="stat-number" data-target="30" data-speed="800">0</span>
+            <span class="stat-label">@Localizer.Get("about.stats.happyClients")</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll('.stat-number');
+        const isArabic = '@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)' === 'ar';
+
+        const options = {
+            threshold: 0.6
+        };
+
+        const convertToArabicNumbers = (num) => {
+            const arabicNumbers = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+            return num.toString().split('').map(d => arabicNumbers[d] || d).join('');
+        };
+
+        const startCount = (el) => {
+            const target = parseInt(el.getAttribute('data-target'));
+            const duration = parseInt(el.getAttribute('data-speed')) || 1000;
+
+            let startTimestamp = null;
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = timestamp - startTimestamp;
+                let value = Math.min(Math.floor((progress / duration) * target), target);
+
+                if (isArabic) {
+                    value = convertToArabicNumbers(value);
+                }
+
+                el.textContent = value;
+
+                if (parseInt(value.toString().replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))) < target) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+
+            window.requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.textContent = '0';
+                    startCount(entry.target);
+                }
+            });
+        }, options);
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+    });
+</script>
+
+
+
+

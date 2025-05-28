@@ -1,0 +1,54 @@
+﻿@inject MCan.Services.JsonLocalizationService Localizer
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+@using System.Text.Json
+@using System.IO
+@using System.Text.Json.Serialization
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row align-items-center content @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl flex-row-reverse " : "")">
+      
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <h2> @Localizer.Get("hero.title")</h2>
+                <p class="lead">@Localizer.Get("hero.subtitle")</p>
+                <div class="cta-buttons  @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl rtl-buttons" : "")" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#portfolio" class="btn btn-primary">@Localizer.Get("hero.buttons.viewWork")</a>
+                    <a href="#contact" class="btn btn-outline">@Localizer.Get("hero.buttons.connect")</a>
+                </div>
+
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <img src="~/Images/main-home-illustration.svg" alt="Portfolio Hero Image" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
+                    <div class="shape-1"></div>
+                    <div class="shape-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+ <script>
+         document.addEventListener("DOMContentLoaded", function () {
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("#navmenu ul li a");
+
+      window.addEventListener("scroll", () => {
+        let currentSection = "";
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+     
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + currentSection) {
+            link.classList.add("active");
+          }
+        });
+      });
+    });
+
+</script>

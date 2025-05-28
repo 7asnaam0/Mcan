@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Models.Service>
+
+@inject MCan.Services.JsonLocalizationService Localizer
+@using Microsoft.Extensions.Localization
+@using System.Globalization
+
+@{
+    ViewData["Title"] = Localizer.Get("services.sectionTitle");
+    var isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+}
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <h2>@Localizer.Get("services.sectionTitle")</h2>
+    <div class="title-shape">
+        <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+    </div>
+    <p>@Localizer.Get("services.sectionDescription")</p>
+</div>
+
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-4">
+        @{
+            int delay = 200;
+        }
+        @foreach (var service in Model)
+        {
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="@delay">
+                <div class="service-item text-center">
+                    <i class="@service.IconClass icon fs-1 mb-3"></i>
+                    <h3>
+                        <a href="service-details.html">
+                            @(isArabic ? service.TitleAr ?? service.TitleEn : service.TitleEn ?? service.TitleAr)
+                        </a>
+                    </h3>
+                    <p>
+                        @(isArabic ? service.DescriptionAr ?? service.DescriptionEn : service.DescriptionEn ?? service.DescriptionAr)
+                    </p>
+                </div>
+            </div>
+            delay += 100;
+        }
+    </div>
+</div>

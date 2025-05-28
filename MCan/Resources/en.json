@@ -1,0 +1,74 @@
+﻿{
+
+  "hero": {
+    "title": "Innovative Solutions for the Modern Market",
+    "subtitle": "Empowering your company with flexibility, speed, and full control over daily operations",
+    "buttons": {
+      "viewWork": "View My Work",
+      "connect": "Let's Connect"
+    }
+  },
+
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "about": {
+    "sectionTitle": "About",
+    "sectionDescription": "We deliver innovative digital solutions to streamline project management, healthcare, and more, empowering your business to succeed in a digital world.",
+    "whoWeAre": "Who We Are",
+    "mainHeading": "Digital Solutions for Your Business",
+    "leadParagraph": "We specialize in crafting tailored software solutions for project management, clinics, hospitals, and various industries to enhance efficiency and control.",
+    "secondParagraph": "Our expert team combines creativity and technology to deliver user-friendly, reliable, and scalable applications that grow with your needs.",
+    "stats": {
+      "yearsExperience": "Years Experience",
+      "projectsCompleted": "Projects Completed",
+      "happyClients": "Happy Clients"
+    }
+  },
+  "services": {
+    "sectionTitle": "Services",
+    "sectionDescription": "In a world driven by digital transformation, we offer smart and innovative software solutions tailored to your ambitions.",
+    "readMore": "Read More"
+  },
+  "portfolio": {
+    "sectionTitle": "Portfolio",
+    "sectionDescription": "Discover some of our latest projects tailored with cutting-edge technologies and design.",
+    "projectCategory": "Project"
+
+  },
+
+
+  "contact": {
+    "sectionTitle": "Contact Us",
+    "heading": "We would love to hear from you",
+    "description": "If you have any questions or inquiries, please feel free to reach out to us.",
+    "address": "Al-Shaheed, Sohag, Egypt",
+    "openMap": "View Map",
+    "form": {
+      "namePlaceholder": "Enter your name",
+      "emailPlaceholder": "Enter your email",
+      "phonePlaceholder": "Enter your phone number",
+      "messagePlaceholder": "Write your message here",
+      "loading": "Sending...",
+      "sentMessage": "Thank you! Your message has been sent successfully.",
+      "submitButton": "Send Message",
+      "fixErrors": "Please correct the errors before submitting."
+    }
+  },
+  "footer": {
+    "copyright": {
+      "text1": "© MCan. All Rights Reserved."
+    },
+
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn"
+    }
+  }
+
+}
