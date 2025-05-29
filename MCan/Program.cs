@@ -38,17 +38,6 @@ localizationOptions.RequestCultureProviders = new List<IRequestCultureProvider>
     new CookieRequestCultureProvider()  // Only use cookie provider
 };
 
-var imageFolderPath = builder.Configuration["ImageSettings:ImageFolderPath"];
-var imageBaseUrl = builder.Configuration["ImageSettings:ImageBaseUrl"]?.Trim('/'); // Ensure no leading/trailing slashes
-
-if (Directory.Exists(imageFolderPath))
-{
-    app.UseStaticFiles(new StaticFileOptions
-    {
-        FileProvider = new PhysicalFileProvider(imageFolderPath),
-        RequestPath = new PathString($"/{imageBaseUrl}")
-    });
-}
 
 app.UseRequestLocalization(localizationOptions);
 // Configure the HTTP request pipeline.
