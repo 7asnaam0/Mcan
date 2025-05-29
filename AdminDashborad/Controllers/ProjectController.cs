@@ -51,7 +51,6 @@ namespace McanDashBorad.Controllers
             {
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
-                    // رفع الصورة
                     string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
                     if (!Directory.Exists(uploadsFolder))
                     {
@@ -64,12 +63,13 @@ namespace McanDashBorad.Controllers
                     {
                         await ImageFile.CopyToAsync(fileStream);
                     }
-                    // حفظ المسار النسبي
-                    project.ImageUrl = "/images/" + uniqueFileName;
+
+                    var baseUrl = $"{Request.Scheme}://{Request.Host}";
+                    project.ImageUrl = $"{baseUrl}/images/{uniqueFileName}";
                 }
                 else
                 {
-                    project.ImageUrl = null; // لو مفيش صورة
+                    project.ImageUrl = null;
                 }
 
                 _context.Add(project);
@@ -100,20 +100,17 @@ namespace McanDashBorad.Controllers
             {
                 try
                 {
-                    // لو جت صورة جديدة، نحذف القديمة ونرفع الجديدة
                     if (ImageFile != null && ImageFile.Length > 0)
                     {
-                        // حذف الصورة القديمة
                         if (!string.IsNullOrEmpty(project.ImageUrl))
                         {
-                            string oldImagePath = Path.Combine(_env.WebRootPath, project.ImageUrl.TrimStart('/'));
+                            string oldImagePath = Path.Combine(_env.WebRootPath, project.ImageUrl.Replace($"{Request.Scheme}://{Request.Host}/", "").TrimStart('/'));
                             if (System.IO.File.Exists(oldImagePath))
                             {
                                 System.IO.File.Delete(oldImagePath);
                             }
                         }
 
-                        // رفع الصورة الجديدة
                         string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
                         if (!Directory.Exists(uploadsFolder))
                         {
@@ -126,11 +123,12 @@ namespace McanDashBorad.Controllers
                         {
                             await ImageFile.CopyToAsync(fileStream);
                         }
-                        project.ImageUrl = "/images/" + uniqueFileName;
+
+                        var baseUrl = $"{Request.Scheme}://{Request.Host}";
+                        project.ImageUrl = $"{baseUrl}/images/{uniqueFileName}";
                     }
                     else
                     {
-                        // لا تغيير في الصورة - نحتاج تحميل المشروع القديم حتى لا نحذف الصورة
                         var oldProject = await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
                         project.ImageUrl = oldProject?.ImageUrl;
                     }
@@ -164,7 +162,7 @@ namespace McanDashBorad.Controllers
             {
                 if (!string.IsNullOrEmpty(project.ImageUrl))
                 {
-                    string imagePath = Path.Combine(_env.WebRootPath, project.ImageUrl.TrimStart('/'));
+                    string imagePath = Path.Combine(_env.WebRootPath, project.ImageUrl.Replace($"{Request.Scheme}://{Request.Host}/", "").TrimStart('/'));
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);
