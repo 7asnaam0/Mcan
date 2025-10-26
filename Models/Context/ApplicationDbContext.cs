@@ -13,6 +13,7 @@ namespace Models.Context
         public DbSet<Project> Projects { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
     }
 }

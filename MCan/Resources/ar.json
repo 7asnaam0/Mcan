@@ -1,70 +1,28 @@
 ﻿{
-  "hero": {
-    "title": "نصنع حلولاً ذكية لمستقبل أعمالك",
-    "subtitle": "نمنح شركتك القوة لتتحرك بسرعة، بمرونة عالية، وتحكم دقيق في كل تفصيلة من تفاصيل العمل اليومي",
-    "buttons": {
-      "viewWork": "اكتشف مشاريعنا",
-      "connect": "تواصل معنا الآن"
-    }
-  },
 
-  "nav": {
-    "home": "الرئيسية",
-    "about": "من نحن",
-    "services": "الخدمات",
-    "portfolio": "معرض الأعمال",
-    "contact": "تواصل معنا"
-  },
-  "about": {
-    "sectionTitle": "من نحن",
-    "sectionDescription": "نقدّم حلولًا رقمية متطورة تُحدث فرقًا حقيقيًا في إدارة المشاريع والرعاية الصحية والمجالات الأخرى، لنمنح عملك دفعة قوية نحو النجاح في عالم رقمي سريع التطور.",
-    "whoWeAre": "من نحن",
-    "mainHeading": "ابتكارات رقمية تدفع أعمالك للأمام",
-    "leadParagraph": "نحن فريق من المطوّرين والمبدعين نُتقن بناء حلول برمجية ذكية لإدارة المشاريع، العيادات، المستشفيات، وغيرها من الصناعات، بهدف تعزيز الكفاءة وتحقيق أقصى درجات التحكم.",
-    "secondParagraph": "يجمع فريقنا بين الرؤية الإبداعية والخبرة التقنية لنقدّم تطبيقات سهلة الاستخدام، عالية الاعتمادية، وقابلة للنمو بما يتماشى مع تطور أعمالك واحتياجاتك المستقبلية.",
-    "stats": {
-      "yearsExperience": "سنوات من الخبرة",
-      "projectsCompleted": "مشاريع تم تنفيذها",
-      "happyClients": "عملاء سعداء"
-    }
-  },
-  "services": {
-    "sectionTitle": "الخدمات",
-    "sectionDescription": "في عالم يقوده التحول الرقمي، نقدم حلول برمجية ذكية ومبتكرة تناسب طموحاتك.",
-    "readMore": "اقرأ المزيد"
-  },
-  "portfolio": {
-    "sectionTitle": "مشاريعنا",
-    "sectionDescription": "اكتشف بعض أحدث مشاريعنا التي تم تصميمها باستخدام أحدث التقنيات والتصاميم.",
-    "projectCategory": "مشروع"
-  },
-  "contact": {
-    "sectionTitle": "اتصل بنا",
-    "heading": "نسعد بتواصلك معنا",
-    "description": "إذا كان لديك أي استفسارات أو أسئلة، لا تتردد في التواصل معنا.",
-    "address": "الشهيد، سوهاج، مصر",
-    "openMap": "عرض الخريطة",
-    "form": {
-      "namePlaceholder": "أدخل اسمك",
-      "emailPlaceholder": "أدخل بريدك الإلكتروني",
-      "phonePlaceholder": "أدخل رقم هاتفك",
-      "messagePlaceholder": "اكتب رسالتك هنا",
-      "loading": "جاري الإرسال...",
-      "sentMessage": "شكرًا لك! تم إرسال رسالتك بنجاح.",
-      "submitButton": "إرسال الرسالة",
-      "fixErrors": "يرجى تصحيح الأخطاء قبل الإرسال."
-    }
-  },
-  "footer": {
-    "copyright": {
-      "text1": " MCan©. كل الحقوق محفوظة."
-    },
-    "social": {
-      "facebook": "فيسبوك",
-      "instagram": "إنستغرام",
-      "linkedin": "لينكدإن"
-    }
-  }
+  "Powerful Digital Solutions With": "Powerful Digital Solutions With",
+  "Smart and practical software for real business needs.": "Smart and practical software for real business needs.",
+  "Smart Software Solutions": "Smart Software Solutions",
+  "Flexible and Scalable Design": "Flexible and Scalable Design",
+  "Experienced and Passionate Team": "Experienced and Passionate Team",
+  "Quality and Security You Can Trust": "Quality and Security You Can Trust",
+  "Continuous Technical Support": "Continuous Technical Support",
+  "Home": "الرئيسية",
+  "About": "من نحن",
+  "Services": "خدماتنا",
+  "Portfolio": "أعمالنا",
+  "Team": "فريق العمل",
+  "Contact": "تواصل معنا",
+  "Language": "اللغة",
+  "Get Started": "ابدأ الآن",
+  "AboutTitle": "من نحن",
+  "AboutIntro": "إمكان (MCan) هي شركة تقنية حديثة تقدم حلولًا رقمية ذكية تساعد الشركات على النمو والابتكار.",
+  "AboutPoint1": "نقدّم خدمات تطوير الأنظمة  بجودة عالية مصممة لتناسب احتياجات عملائنا.",
+  "AboutPoint2": "يجمع فريقنا بين الإبداع والخبرة التقنية والتفكير الاستراتيجي لتحقيق نتائج فعالة.",
+  "AboutPoint3": "نؤمن بالتحسين المستمر والشفافية وبناء شراكات طويلة الأمد مع عملائنا.",
+  "AboutConclusion": "في MCan، نسعى لتمكين أعمالك بالتقنية المناسبة لتحقيق النجاح في العصر الرقمي."
+
+
 }
 
 
