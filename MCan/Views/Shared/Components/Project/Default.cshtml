@@ -1,54 +1,61 @@
 ﻿@model IEnumerable<Models.Project>
 @inject IConfiguration Configuration
 @inject MCan.Services.JsonLocalizationService Localizer
-@using Microsoft.Extensions.Localization
 @using System.Globalization
 
 @{
     ViewData["Title"] = Localizer.Get("portfolio.sectionTitle");
-    var imageBaseUrl = Configuration["ImageSettings:ImageBaseUrl"];
+    var imageBaseUrl = Configuration["ImageSettings:ImageBaseUrl"]; // Optional base URL
     var isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
 }
 
-<div class="container section-title" data-aos="fade-up">
-    <h2>@Localizer.Get("portfolio.sectionTitle")</h2>
-    <div class="title-shape">
-        <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 0,10 C 40,0 60,20 100,10 C 140,0 160,20 200,10" fill="none" stroke="currentColor" stroke-width="2"></path>
-        </svg>
-    </div>
-    <p>@Localizer.Get("portfolio.sectionDescription")</p>
-</div>
+<!-- Portfolio Section -->
+<section id="portfolio" class="portfolio section">
 
-<div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-        <div class="row g-4 isotope-container" data-aos="fade-up" data-aos-delay="300">
-            @foreach (var project in Model)
-            {
-              
-                <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
-                    <div class="portfolio-card">
-                        <div class="portfolio-image">
-                            <img src="@project.ImageUrl" class="img-fluid" alt="@(isArabic ? project.TitleAr ?? project.TitleEn : project.TitleEn ?? project.TitleAr)" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-actions">
-                                    <a href="@project.ImageUrl" class="glightbox preview-link" data-gallery="portfolio-gallery-web">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <a href="@project.ProjectLink" target="_blank" class="details-link">
-                                        <i class="bi bi-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="portfolio-content">
-                            @* <span class="category">@Localizer.Get("portfolio.projectCategory")</span> *@
-                            <h3>@(isArabic ? project.TitleAr ?? project.TitleEn : project.TitleEn ?? project.TitleAr)</h3>
-                            <p>@(isArabic ? project.DescriptionAr ?? project.DescriptionEn : project.DescriptionEn ?? project.DescriptionAr)</p>
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <p>Check our Portfolio</p>
+    </div><!-- End Section Title -->
+
+
+    <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                @* <li data-filter="*" class="filter-active">All</li> *@
+                @* <li data-filter=".filter-app">App</li> *@
+                @* <li data-filter=".filter-product">Card</li> *@
+                @* <li data-filter=".filter-branding">Web</li> *@
+            </ul><!-- End Portfolio Filters -->
+
+            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                @foreach (var project in Model)
+                {
+
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                        <img src="@project.ImageUrl" class="img-fluid" alt="@project.TitleEn" />
+
+                        <div class="portfolio-info">
+                            <h4>@project.TitleEn</h4>
+                            <p>@project.DescriptionEn</p>
+                            <a href="@project.ImageUrl" title="@project.TitleEn data-gallery="portfolio-gallery-app" class="glightbox preview-link">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                            @* 
+                            <a href="@project.ProjectLink" title="More Details" class="details-link">
+                                <i class="bi bi-link-45deg"></i>
+                            </a>
+                            *@
                         </div>
                     </div>
-                </div>
-            }
+
+                    <!-- End Portfolio Item -->
+                }
+            </div><!-- End Portfolio Container -->
+
         </div>
+
     </div>
-</div>
+
+</section><!-- /Portfolio Section -->

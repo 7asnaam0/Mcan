@@ -1,38 +1,58 @@
 ﻿@inject MCan.Services.JsonLocalizationService Localizer
 @using Microsoft.Extensions.Localization
 @using System.Globalization
-    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var isArabic = currentCulture == "ar";
+}
+
+<div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between @(isArabic ? "flex-row-reverse" : "")">
 
         <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="~/Images/LOGO.png" alt="">
-            <h1 class="sitename"></h1>
+        <img src="~/assets/logo.png" alt="">
+        
+        <h1 class="sitename">M<span>.</span>CAN</h1>
+      
         </a>
 
-    <nav id="navmenu" class="navmenu @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl-nav" : "")">
-        <ul>
-            <li><a href="#hero" class="active">@Localizer.Get("nav.home")</a></li>
-            <li><a href="#about">@Localizer.Get("nav.about")</a></li>
-            <li><a href="#services">@Localizer.Get("nav.services")</a></li>
-            <li><a href="#portfolio">@Localizer.Get("nav.portfolio")</a></li>
-            <li><a href="#contact">@Localizer.Get("nav.contact")</a></li>
+    <nav id="navmenu" class="navmenu"  @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl-nav" : "")">
+            <ul>
+            <li><a href="#hero" class="active">@Localizer.Get("Home")<br></a></li>
+            <li><a href="#about">@Localizer.Get("About")</a></li>
+            <li><a href="#services">@Localizer.Get("Services")</a></li>
+            <li><a href="#portfolio">@Localizer.Get("Portfolio")</a></li>
+            @* <li><a href="#team">@Localizer.Get("Team")</a></li> *@
+            <li><a href="#contact">@Localizer.Get("Contact")</a></li>
+            <!-- Language Dropdown -->
+            <li class="dropdown">
+                <a href="#">
+                    <span>@Localizer.Get("Language")</span> <i class="bi bi-chevron-down toggle-dropdown"></i>
+                </a>
+                <ul>
+                    <li>
+                        <form method="post" asp-controller="Localization" asp-action="SetLanguage" id="langForm">
+                            <button type="submit" name="culture" value="en"
+                                    class="dropdown-item border-0 bg-transparent w-100 text-start @(currentCulture == "en" ? "active" : "")">
+                                English
+                            </button>
+
+                            <button type="submit" name="culture" value="ar"
+                                    class="dropdown-item border-0 bg-transparent w-100 text-start @(currentCulture == "ar" ? "active" : "")">
+                                العربية
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
 
-    <div class="header-social-links" style="display: flex; align-items: center; gap: 10px;">
-        <form method="post" asp-controller="Localization" asp-action="SetLanguage" class="d-inline">
-            @{
-                var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-                var isEnglish = string.IsNullOrEmpty(currentCulture) || currentCulture == "en";
-            }
-            <select name="culture" onchange="this.form.submit()" class="form-select form-select-sm">
-                <option value="en" selected="@isEnglish">EN</option>
-                <option value="ar" selected="@(currentCulture == "ar")">AR</option>
-            </select>
-        </form>
-        <a href="https://www.facebook.com/people/MCan-%D8%A5%D9%85%D9%80%D9%80%D9%80%D9%83%D8%A7%D9%86/61575164548300/" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-
+    @* <a class="btn-getstarted" href="index.html#about">Get Started</a> *@
     </div>
+
+  

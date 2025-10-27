@@ -1,0 +1,117 @@
+﻿
+
+@model IEnumerable<Models.Client>
+@{
+    var total = (int)(ViewBag.TotalClients ?? 0);
+    var loaded = (int)(ViewBag.Loaded ?? 0);
+    var pageSize = (int)(ViewBag.PageSize ?? 5);
+}
+
+
+<section id="clients" class="clients section">
+        <div class="container section-title" data-aos="fade-up">
+        <h2>Our Clients</h2>
+        <p>Check our Clients</p>
+        </div>
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="swiper init-swiper">
+      <script type="application/json" class="swiper-config">
+        {
+          "loop": false,
+          "speed": 600,
+          "slidesPerView": "auto",
+          "pagination": { "el": ".swiper-pagination", "type": "bullets", "clickable": true },
+          "breakpoints": {
+            "320": { "slidesPerView": 2, "spaceBetween": 40 },
+            "480": { "slidesPerView": 3, "spaceBetween": 60 },
+            "640": { "slidesPerView": 4, "spaceBetween": 80 },
+            "992": { "slidesPerView": 6, "spaceBetween": 120 }
+          }
+        }
+      </script>
+
+            <div id="clients-wrapper" class="clients-grid">
+                @foreach (var client in Model)
+                {
+                    <div class="client-item">
+                        <img src="@(string.IsNullOrEmpty(client.Image) ? Url.Content("~/assets/img/clients/placeholder.png") : client.Image)"
+                             class="img-fluid" alt="@client.Name" />
+                    </div>
+                }
+            </div>
+
+            @if (total > pageSize)
+            {
+                <div class="load-more-container text-center mt-4">
+                    <button id="loadMoreClients" class="btn-getstarted" data-skip="@loaded" data-total="@total" data-pagesize="@pageSize">
+                        <span>Load more</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 74" height="34" width="34">
+                            <circle stroke-width="3" stroke="black" r="35.5" cy="37" cx="37"></circle>
+                            <path fill="black" d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"></path>
+                        </svg>
+                    </button>
+                </div>
+            }
+
+
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+    (function () {
+      const btn = document.getElementById('loadMoreClients');
+      if (!btn) return;
+
+      btn.addEventListener('click', async function () {
+        const skip = parseInt(btn.getAttribute('data-skip') || '0');
+        const total = parseInt(btn.getAttribute('data-total') || '0');
+        const pageSize = parseInt(btn.getAttribute('data-pagesize') || '5');
+
+        btn.disabled = true;
+        btn.innerHTML = '<span>Loading...</span>';
+
+        try {
+          const res = await fetch(`/Client/GetMore?skip=${skip}&pageSize=${pageSize}`);
+          if (!res.ok) throw new Error('Request failed');
+
+          const data = await res.json();
+          const items = data.items || [];
+
+          const wrapper = document.getElementById('clients-wrapper');
+
+          if (items.length === 0) {
+            btn.parentElement.style.display = 'none';
+            return;
+          }
+
+          // إضافة الصور الجديدة بنفس الشكل الأصلي
+          items.forEach(it => {
+            const div = document.createElement('div');
+            div.classList.add('client-item');
+            const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
+            div.innerHTML = `<img src="${imgSrc}" alt="${it.name}" class="img-fluid" />`;
+            wrapper.appendChild(div);
+          });
+
+          const newSkip = skip + items.length;
+          btn.setAttribute('data-skip', newSkip);
+
+          if (newSkip >= total) {
+            btn.parentElement.style.display = 'none';
+          } else {
+            btn.disabled = false;
+            btn.innerHTML = '<span>Load more</span>';
+          }
+        } catch (err) {
+          console.error(err);
+          btn.disabled = false;
+          btn.innerHTML = '<span>Load more</span>';
+          alert('Error loading more clients.');
+        }
+      });
+    })();
+</script>
+
