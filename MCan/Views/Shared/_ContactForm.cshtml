@@ -8,189 +8,142 @@
     var linkDirection = isArabic ? "rtl" : "ltr";
     var iconClass = isArabic ? "bi bi-arrow-left ms-2" : "bi bi-arrow-right ms-2";
 }
-}
-<div class="container"
-     data-aos="fade-up"
-     data-aos-delay="100"
-     dir="@(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "rtl" : "ltr")">
-    <div class="row g-5">
 
-        <!-- العمود الأول: النص -->
-        <div class="col-lg-6 @(CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "text-end" : "text-start")">
-            <div class="content" data-aos="fade-up" data-aos-delay="200">
-                <div class="section-category mb-3">@Localizer.Get("contact.sectionTitle")</div>
-                <h2 class="display-5 mb-4">@Localizer.Get("contact.heading")</h2>
-                <p class="lead mb-4">@Localizer.Get("contact.description")</p>
+<section id="contact" class="contact section">
 
-                <div class="contact-info mt-5">
-                    <div class="info-item d-flex mb-3">
-                        <i class="bi bi-envelope-at me-3  @iconMarginClass"></i>
-                        <span>m.can.group.01@gmail.com</span>
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Contact Us</p>
+    </div><!-- End Section Title -->
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+            <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d605.0192794495807!2d31.692899730228003!3d26.552331440807993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2seg!4v1761554031005!5m2!1sar!2seg" width="600" height="450"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+           
+        </div><!-- End Google Maps -->
+
+        <div class="row gy-4">
+
+            <div class="col-lg-4">
+                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-geo-alt flex-shrink-0"></i>
+                    <div>
+                        <h3>Address</h3>
+                        <p>Al-Oruba Square, Al-Mohandessin Towers, Tower No. 5</p>
                     </div>
+                </div><!-- End Info Item -->
 
-                    <div class="info-item d-flex mb-3 ">
-                        <i class="bi bi-telephone me-3  @iconMarginClass"></i>
-                        <span>01105693401</span>
+                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                    <i class="bi bi-telephone flex-shrink-0"></i>
+                    <div>
+                        <h3>Call Us</h3>
+                        <p>+201105693401</p>
+                        <p>+201070732605 </p>
+                        <p>+201070732613 </p>
                     </div>
+                </div><!-- End Info Item -->
 
-                    <div class="info-item d-flex mb-4">
-                        <i class="bi bi-geo-alt me-3  @iconMarginClass" "></i>
-                        <span>@Localizer.Get("contact.address")</span>
+                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
+                    <i class="bi bi-envelope flex-shrink-0"></i>
+                    <div>
+                        <h3>Email Us</h3>
+                        <p>m.can.group.01@gmail.com</p>
                     </div>
+                </div><!-- End Info Item -->
 
-                    <a href="https://www.google.com/maps/place/The+American+University+in+Cairo/"
-                       target="_blank"
-                       class="map-link d-inline-flex align-items-center"
-                       style="direction: @linkDirection; text-align: @(isArabic ? "right" : "left");">
-
-                            @if (isArabic)
-                            {
-                            <i class="@iconClass"></i>
-                            <span class="ms-1">@Localizer.Get("contact.openMap")</span>
-                            }
-                            else
-                            {
-                            <span class="me-1">@Localizer.Get("contact.openMap")</span>
-                            <i class="@iconClass"></i>
-                            }
-                    </a>
-                </div>
             </div>
-        </div>
 
-        <!-- العمود الثاني: الفورم -->
-        <div class="col-lg-6">
-            <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
-                <div class="card-body p-4 p-lg-5">
-                    <form method="post" id="contactForm">
+            <div class="col-lg-8">
+                <form method="post" id="contactForm" class="custom-contact-form" data-aos="fade-up" data-aos-delay="200">
                         @Html.AntiForgeryToken()
-                        <div id="form-messages" class="alert" style="display:none;"></div>
-                        <div class="row gy-4">
+                    <div class="row gy-4">
 
-                            <div class="col-12">
-                                <input asp-for="Name" class="form-control" placeholder="@Localizer.Get("contact.form.namePlaceholder")" required />
-                                <span asp-validation-for="Name" class="text-danger" data-valmsg-for="Name"></span>
-                            </div>
+                        <div class="col-md-6">
+                            <input asp-for="Name" class="form-control" placeholder="@Localizer.Get("contact.form.namePlaceholder")" required />
+                            <span asp-validation-for="Name" class="text-danger" data-valmsg-for="Name"></span>
+                        </div>
 
-                            <div class="col-12">
-                                <input asp-for="Email" class="form-control" placeholder="@Localizer.Get("contact.form.emailPlaceholder")" required />
-                                <span asp-validation-for="Email" class="text-danger" data-valmsg-for="Email"></span>
-                            </div>
+                        <div class="col-md-6 ">
+                            <input asp-for="Email" class="form-control" placeholder="@Localizer.Get("contact.form.emailPlaceholder")" required />
+                            <span asp-validation-for="Email" class="text-danger" data-valmsg-for="Email"></span>
+                        </div>
 
-                            <div class="col-12">
-                                <input asp-for="PhoneNumber" class="form-control" placeholder="@Localizer.Get("contact.form.phonePlaceholder")" required />
-                                <span asp-validation-for="PhoneNumber" class="text-danger" data-valmsg-for="PhoneNumber"></span>
-                            </div>
+                        <div class="col-md-12">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="@Localizer.Get("contact.form.phonePlaceholder")" required />
+                            <span asp-validation-for="PhoneNumber" class="text-danger" data-valmsg-for="PhoneNumber"></span>
+                        </div>
 
-                            <div class="col-12">
+                        <div class="col-md-12">
                                 <textarea asp-for="Message" class="form-control" rows="6" placeholder="@Localizer.Get("contact.form.messagePlaceholder")" required></textarea>
                                 <span asp-validation-for="Message" class="text-danger" data-valmsg-for="Message"></span>
-                            </div>
-
-                            <div class="col-12 text-center">
-                                <div class="loading" style="display:none;">@Localizer.Get("contact.form.loading")</div>
-                                <div class="error-message text-danger" style="display:none;" id="error-message">@Localizer.Get("contact.form.fixErrors")</div>
-
-                                <div class="sent-message" style="display:none;">@Localizer.Get("contact.form.sentMessage")</div>
-
-                                <button type="submit" class="btn btn-submit w-100">@Localizer.Get("contact.form.submitButton")</button>
-                            </div>
-
                         </div>
-                    </form>
-                </div>
-            </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="loading" style="display:none;">Loading...</div>
+
+                            <button type="submit">Send Message</button>
+                        </div>
+
+                    </div>
+                </form>
+                <div id="formStatus" style="margin-top:10px; text-align:center; display:none;"></div> 
+
+            </div><!-- End Contact Form -->
+
         </div>
 
     </div>
-</div>
 
-
-<!-- JQuery -->
+</section><!-- /Contact Section -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-    function decodeHtml(html) {
-      var txt = document.createElement("textarea");
-      txt.innerHTML = html;
-      return txt.value;
-    }
+      const wrapper = document.getElementById('clients-wrapper');
+    const btn = document.getElementById('loadMoreClients');
+    if (!btn) return;
 
-    var msgFixErrors = decodeHtml('@Localizer.Get("contact.form.fixErrors")');
-    var msgSentMessage = decodeHtml('@Localizer.Get("contact.form.sentMessage")');
-    var msgErrorGeneric = decodeHtml('@Localizer.Get("contact.form.errorGeneric", "حدث خطأ ما، حاول مرة أخرى.")');
+    btn.addEventListener('click', async function () {
+        const skip = parseInt(btn.getAttribute('data-skip') || '0');
+        const total = parseInt(btn.getAttribute('data-total') || '0');
+        btn.disabled = true;
+        btn.textContent = 'Loading...';
 
-    $(document).ready(function () {
-        $('#contactForm').submit(function (e) {
-            e.preventDefault();
+        try {
+            const res = await fetch(`/Client/GetMore?skip=${skip}`);
+            if (!res.ok) throw new Error('Request failed');
+            const data = await res.json();
+            const items = data.items || [];
 
-            var form = $(this);
-            var url = '@Url.Action("Create", "Contact")';
-            var formData = new FormData(form[0]);
-            var token = $('input[name="__RequestVerificationToken"]').val();
+            if (items.length === 0) {
+                btn.parentElement.style.display = 'none';
+                return;
+            }
 
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'RequestVerificationToken': token
-                },
-                success: function (response) {
-                    if (response.success) {
-                        $('#form-messages')
-                            .removeClass('alert-danger')
-                            .addClass('alert-success')
-                            .text(msgSentMessage)
-                            .show();
-
-                        $('.sent-message').show();
-                        form[0].reset();
-                        $('.text-danger').text('');
-
-                        setTimeout(function () {
-                            $('#form-messages').fadeOut();
-                            $('.sent-message').fadeOut();
-                        }, 3000);
-
-                    } else {
-                        if (response.errors) {
-                            $.each(response.errors, function (key, value) {
-                                $('[data-valmsg-for="' + key + '"]').text(value);
-                            });
-                        }
-
-                        $('#form-messages')
-                            .removeClass('alert-success')
-                            .addClass('alert-danger')
-                            .text(msgFixErrors)
-                            .show();
-
-                        $('.sent-message').hide();
-
-                        setTimeout(function () {
-                            $('#form-messages').fadeOut();
-                        }, 3000);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $('#form-messages')
-                        .removeClass('alert-success')
-                        .addClass('alert-danger')
-                        .text(msgErrorGeneric)
-                        .show();
-
-                    console.error(xhr.responseText);
-
-                    setTimeout(function () {
-                        $('#form-messages').fadeOut();
-                    }, 3000);
-                }
+            items.forEach(it => {
+                const div = document.createElement('div');
+                div.className = 'client-item';
+                const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
+                div.innerHTML = `<img src="${imgSrc}" class="img-fluid" alt="${it.name}" />`;
+                wrapper.appendChild(div);
             });
-        });
+
+            const newSkip = skip + items.length;
+            btn.setAttribute('data-skip', newSkip);
+
+            if (newSkip >= total) {
+                btn.parentElement.style.display = 'none';
+            } else {
+                btn.disabled = false;
+                btn.textContent = 'Load more';
+            }
+
+        } catch (err) {
+            console.error(err);
+            btn.disabled = false;
+            btn.textContent = 'Load more';
+            alert('Error loading more clients.');
+        }
     });
+
 </script>
-
-

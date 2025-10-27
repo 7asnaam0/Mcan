@@ -9,6 +9,10 @@
 
 
 <section id="clients" class="clients section">
+        <div class="container section-title" data-aos="fade-up">
+        <h2>Our Clients</h2>
+        <p>Check our Clients</p>
+        </div>
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="swiper init-swiper">
       <script type="application/json" class="swiper-config">
@@ -26,18 +30,19 @@
         }
       </script>
 
-      <div class="swiper-wrapper align-items-center" id="clients-wrapper">
-        @foreach (var client in Model)
-        {
-            <div class="swiper-slide">
-                <img src="@(string.IsNullOrEmpty(client.Image) ? Url.Content("~/assets/img/clients/placeholder.png") : client.Image)" 
-                     class="img-fluid" alt="@client.Name" />
+            <div id="clients-wrapper" class="clients-grid">
+                @foreach (var client in Model)
+                {
+                    <div class="client-item">
+                        <img src="@(string.IsNullOrEmpty(client.Image) ? Url.Content("~/assets/img/clients/placeholder.png") : client.Image)"
+                             class="img-fluid" alt="@client.Name" />
+                    </div>
+                }
             </div>
-        }
-                <!-- آخر شريحة للزرار -->
-                <div class="swiper-slide text-center">
-  
 
+            @if (total > pageSize)
+            {
+                <div class="load-more-container text-center mt-4">
                     <button id="loadMoreClients" class="btn-getstarted" data-skip="@loaded" data-total="@total" data-pagesize="@pageSize">
                         <span>Load more</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 74" height="34" width="34">
@@ -46,9 +51,8 @@
                         </svg>
                     </button>
                 </div>
+            }
 
-
-      </div>
 
       <div class="swiper-pagination"></div>
     </div>
@@ -57,60 +61,57 @@
 
 
 <script>
-    (function(){
+    (function () {
       const btn = document.getElementById('loadMoreClients');
       if (!btn) return;
 
       btn.addEventListener('click', async function () {
         const skip = parseInt(btn.getAttribute('data-skip') || '0');
         const total = parseInt(btn.getAttribute('data-total') || '0');
+        const pageSize = parseInt(btn.getAttribute('data-pagesize') || '5');
 
         btn.disabled = true;
-        btn.textContent = 'Loading...';
+        btn.innerHTML = '<span>Loading...</span>';
 
         try {
-          const res = await fetch(`/Client/GetMore?skip=${skip}`);
+          const res = await fetch(`/Client/GetMore?skip=${skip}&pageSize=${pageSize}`);
           if (!res.ok) throw new Error('Request failed');
 
           const data = await res.json();
           const items = data.items || [];
 
+          const wrapper = document.getElementById('clients-wrapper');
+
           if (items.length === 0) {
-            btn.closest('.swiper-slide').style.display = 'none';
+            btn.parentElement.style.display = 'none';
+            return;
+          }
+
+          // إضافة الصور الجديدة بنفس الشكل الأصلي
+          items.forEach(it => {
+            const div = document.createElement('div');
+            div.classList.add('client-item');
+            const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
+            div.innerHTML = `<img src="${imgSrc}" alt="${it.name}" class="img-fluid" />`;
+            wrapper.appendChild(div);
+          });
+
+          const newSkip = skip + items.length;
+          btn.setAttribute('data-skip', newSkip);
+
+          if (newSkip >= total) {
+            btn.parentElement.style.display = 'none';
           } else {
-            const wrapper = document.getElementById('clients-wrapper');
-            const loadMoreSlide = btn.closest('.swiper-slide');
-
-            items.forEach(it => {
-              const slide = document.createElement('div');
-              slide.classList.add('swiper-slide');
-              const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
-              slide.innerHTML = `<img src="${imgSrc}" class="img-fluid" style="filter: none; opacity: 1;" alt="${it.name}" />`;
-
-              wrapper.insertBefore(slide, loadMoreSlide);
-            });
-
-            const newSkip = skip + items.length;
-            btn.setAttribute('data-skip', newSkip);
-
-            if (newSkip >= total) {
-              loadMoreSlide.style.display = 'none';
-            } else {
-              btn.disabled = false;
-              btn.textContent = 'Load more';
-            }
-
-            // تحديث swiper
-            const swiperEl = document.querySelector('.init-swiper');
-            const swiper = swiperEl && swiperEl.swiper;
-            if (swiper) swiper.update();
+            btn.disabled = false;
+            btn.innerHTML = '<span>Load more</span>';
           }
         } catch (err) {
           console.error(err);
           btn.disabled = false;
-          btn.textContent = 'Load more';
+          btn.innerHTML = '<span>Load more</span>';
           alert('Error loading more clients.');
         }
       });
     })();
 </script>
+

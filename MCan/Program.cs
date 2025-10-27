@@ -52,7 +52,7 @@ localizationOptions.RequestCultureProviders = new List<IRequestCultureProvider>
 app.UseRequestLocalization(localizationOptions);
 
 app.UseRouting();
-
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapStaticAssets();

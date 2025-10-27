@@ -209,3 +209,26 @@
     document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    AOS.init({ once: true }); // initialize AOS
+});
+
+// ??? ????? Clients ViewComponent
+(function () {
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            // ??? ?? ??????? ?? DOM? ??? AOS
+            AOS.refresh();
+        });
+    });
+
+    // ???? ??? container ???? ????? ??? Clients
+    const container = document.querySelector('#clients'); // ?? ??? ID ??????? ??? Clients section
+    if (container) {
+        observer.observe(container, { childList: true, subtree: true });
+    }
+})();

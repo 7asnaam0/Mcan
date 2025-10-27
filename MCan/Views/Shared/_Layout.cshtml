@@ -10,7 +10,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MCan</title>
+    <link rel="icon" type="image/png" href="~/assets/logo.png">
+    <title>M.Can</title>
     <script type="importmap"></script>
 
     <!-- Favicons -->
@@ -42,35 +43,24 @@
         <main class="main">
             <partial name="_Header" />
             <partial name="_About" />
-           
-        
+            <partial name="_Services" />
             @await Component.InvokeAsync("Clients")
-        <partial name="_Services" />
-            @* @await Component.InvokeAsync("Services") *@
-
-
-            <section id="portfolio" class="portfolio section">
-
-               @await Component.InvokeAsync("Project") 
-         </section>
-
-            <section id="contact" class="contact section light-background">
-                <partial name="_ContactForm" />
-               </section>
+            <partial name="_CallToAction" />
+            @await Component.InvokeAsync("Project")
+            <partial name="_Stats" />
+            <partial name="_ContactForm" />
             @RenderBody()
         </main>
 
-
-    <footer id="footer" class="footer">
         <partial name="_Footer" />
-    </footer>
+  
 
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center">
         <i class="bi bi-arrow-up-short"></i>
     </a>
 
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/vendor/php-email-form/validate.js"></script>
+    <script src="~/vendor/custom-contact-form/validate.js"></script>
     <script src="~/vendor/aos/aos.js"></script>
     <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
