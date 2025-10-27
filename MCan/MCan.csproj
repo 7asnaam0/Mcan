@@ -4,8 +4,17 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+
+	  <SelfContained>false</SelfContained>
+	  <PublishSingleFile>false</PublishSingleFile>
+	  <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+	  <DebugType>embedded</DebugType>
+	  
   </PropertyGroup>
 
+
+	
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
