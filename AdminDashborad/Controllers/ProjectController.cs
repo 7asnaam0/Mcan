@@ -1,10 +1,13 @@
-﻿using Models.Context;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
 using Models;
 using Models.Context;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace McanDashBorad.Controllers
 {
@@ -47,37 +50,36 @@ namespace McanDashBorad.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Project project, IFormFile? ImageFile)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(project);
+
+            if (ImageFile != null && ImageFile.Length > 0)
             {
-                if (ImageFile != null && ImageFile.Length > 0)
-                {
-                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                    if (!Directory.Exists(uploadsFolder))
-                    {
-                        Directory.CreateDirectory(uploadsFolder);
-                    }
-                    string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await ImageFile.CopyToAsync(fileStream);
-                    }
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}";
-                    project.ImageUrl = $"{baseUrl}/images/{uniqueFileName}";
-                }
-                else
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    project.ImageUrl = null;
+                    await ImageFile.CopyToAsync(fileStream);
                 }
 
-                _context.Add(project);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                project.ImageUrl = uniqueFileName;
             }
-            return View(project);
+            else
+            {
+                project.ImageUrl = null;
+            }
+
+            _context.Add(project);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -94,67 +96,66 @@ namespace McanDashBorad.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Project project, IFormFile? ImageFile)
         {
-            if (id != project.Id) return NotFound();
+            if (id != project.Id)
+                return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(project);
+
+            try
             {
-                try
+                // استرجاع المشروع القديم
+                var oldProject = await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                if (oldProject == null)
+                    return NotFound();
+
+                if (ImageFile != null && ImageFile.Length > 0)
                 {
-                    if (ImageFile != null && ImageFile.Length > 0)
+                    // حذف الصورة القديمة إذا موجودة
+                    if (!string.IsNullOrEmpty(oldProject.ImageUrl))
                     {
-                        if (!string.IsNullOrEmpty(project.ImageUrl))
-                        {
-                            string oldImagePath = Path.Combine(_env.WebRootPath, project.ImageUrl.Replace($"{Request.Scheme}://{Request.Host}/", "").TrimStart('/'));
-                            if (System.IO.File.Exists(oldImagePath))
-                            {
-                                System.IO.File.Delete(oldImagePath);
-                            }
-                        }
-
-                        string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                        if (!Directory.Exists(uploadsFolder))
-                        {
-                            Directory.CreateDirectory(uploadsFolder);
-                        }
-                        string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await ImageFile.CopyToAsync(fileStream);
-                        }
-
-                        var baseUrl = $"{Request.Scheme}://{Request.Host}";
-                        project.ImageUrl = $"{baseUrl}/images/{uniqueFileName}";
-                    }
-                    else
-                    {
-                        var oldProject = await _context.Projects.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
-                        project.ImageUrl = oldProject?.ImageUrl;
+                        string oldImagePath = Path.Combine(_env.WebRootPath, "images", oldProject.ImageUrl);
+                        if (System.IO.File.Exists(oldImagePath))
+                            System.IO.File.Delete(oldImagePath);
                     }
 
-                    _context.Update(project);
-                    await _context.SaveChangesAsync();
+                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                    if (!Directory.Exists(uploadsFolder))
+                        Directory.CreateDirectory(uploadsFolder);
+
+                    string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    project.ImageUrl = uniqueFileName;
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ProjectExists(project.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    // الاحتفاظ بالصورة القديمة
+                    project.ImageUrl = oldProject.ImageUrl;
                 }
-                return RedirectToAction(nameof(Index));
+
+                _context.Update(project);
+                await _context.SaveChangesAsync();
             }
-            return View(project);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Projects.Any(e => e.Id == project.Id))
+                    return NotFound();
+                else
+                    throw;
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
 
+        // POST: Projects/Delete/5
         [HttpPost]
-        [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var project = await _context.Projects.FindAsync(id);
@@ -162,11 +163,9 @@ namespace McanDashBorad.Controllers
             {
                 if (!string.IsNullOrEmpty(project.ImageUrl))
                 {
-                    string imagePath = Path.Combine(_env.WebRootPath, project.ImageUrl.Replace($"{Request.Scheme}://{Request.Host}/", "").TrimStart('/'));
+                    string imagePath = Path.Combine(_env.WebRootPath, "images", project.ImageUrl);
                     if (System.IO.File.Exists(imagePath))
-                    {
                         System.IO.File.Delete(imagePath);
-                    }
                 }
 
                 _context.Projects.Remove(project);
@@ -175,9 +174,6 @@ namespace McanDashBorad.Controllers
             return Ok();
         }
 
-        private bool ProjectExists(int id)
-        {
-            return _context.Projects.Any(e => e.Id == id);
-        }
+
     }
 }

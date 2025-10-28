@@ -1811,3 +1811,23 @@ button:active {
     display: flex;
     justify-content: center;
 }
+nav select {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+    nav select option {
+        color: black; /* علشان القايمة تبان كويس */
+    }
+/* لما اللغة تكون عربية */
+.rtl-nav {
+    direction: rtl;
+}
+
+    .rtl-nav ul {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 15px;
+    }

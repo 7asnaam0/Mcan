@@ -13,28 +13,57 @@
 <div class="row g-4">
     @foreach (var project in Model)
     {
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3" id="project-@project.Id">
             <div class="card h-100 shadow-sm">
+
                 @if (!string.IsNullOrEmpty(project.ImageUrl))
                 {
-                    <img src="@project.ImageUrl" class="card-img-top" alt="Project Image" style="height:180px; object-fit:cover;" />
+                    <img src="~/images/@project.ImageUrl"
+                         alt="@project.TitleAr"
+                         style="width:100%" />
                 }
                 else
                 {
-                    <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white" style="height:180px;">
-                        No Image
-                    </div>
+                    <span class="text-muted">No Image</span>
                 }
+
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">@project.TitleAr</h5>
                     <p class="card-text text-truncate" title="@project.DescriptionAr">@project.DescriptionAr</p>
                     <div class="mt-auto">
                         <a asp-action="Details" asp-route-id="@project.Id" class="btn btn-info btn-sm me-1">Details</a>
                         <a asp-action="Edit" asp-route-id="@project.Id" class="btn btn-warning btn-sm me-1">Edit</a>
-                        <a asp-action="DeleteConfirmed" asp-route-id="@project.Id" class="btn btn-danger btn-sm">Delete</a>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProject(@project.Id)">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
+
+@section Scripts {
+
+    <script>
+        function deleteProject(id) {
+            if (!confirm('هل أنت متأكد من الحذف؟')) return;
+
+            fetch(`/Projects/DeleteConfirmed/${id}`, {
+                method: 'POST'
+            })
+            .then(response => {
+                if (response.ok) {
+                    const projectElement = document.getElementById(`project-${id}`);
+                    if (projectElement) projectElement.remove();
+                    alert('تم الحذف بنجاح');
+                } else {
+                    alert('حدث خطأ أثناء الحذف');
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('حدث خطأ أثناء الحذف');
+            });
+        }
+    </script>
+
+}

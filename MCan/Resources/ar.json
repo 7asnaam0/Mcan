@@ -1,28 +1,118 @@
 ﻿{
+  "Powerful Digital Solutions With": "نقدم لك حلولاً رقمية قوية تجمع بين الابتكار والكفاءة مع",
+  "descraption": "برمجيات ذكية وعملية لتلبية احتياجاتك.",
 
-  "Powerful Digital Solutions With": "Powerful Digital Solutions With",
-  "Smart and practical software for real business needs.": "Smart and practical software for real business needs.",
-  "Smart Software Solutions": "Smart Software Solutions",
-  "Flexible and Scalable Design": "Flexible and Scalable Design",
-  "Experienced and Passionate Team": "Experienced and Passionate Team",
-  "Quality and Security You Can Trust": "Quality and Security You Can Trust",
-  "Continuous Technical Support": "Continuous Technical Support",
+
+  "Smart Software Solutions": "حلول برمجية ذكية ترتقي بأعمالك إلى مستوى جديد",
+  "Flexible and Scalable Design": "تصميم مرن وقابل للتوسع لينمو مع طموحاتك",
+  "Experienced and Passionate Team": "فريق متمرس وشغوف يضع النجاح هدفه الأول",
+  "Quality and Security You Can Trust": "جودة عالية وأمان موثوق لراحة بالك",
+  "Continuous Technical Support": "دعم فني متواصل لضمان استمرارية أعمالك بلا توقف",
+  "Mcan": "إمكان",
+
+
   "Home": "الرئيسية",
   "About": "من نحن",
-  "Services": "خدماتنا",
+  "Services": "الخدمات",
   "Portfolio": "أعمالنا",
-  "Team": "فريق العمل",
-  "Contact": "تواصل معنا",
+  "Contact": "اتصل بنا",
   "Language": "اللغة",
-  "Get Started": "ابدأ الآن",
+
+
+
+
   "AboutTitle": "من نحن",
-  "AboutIntro": "إمكان (MCan) هي شركة تقنية حديثة تقدم حلولًا رقمية ذكية تساعد الشركات على النمو والابتكار.",
+  "AboutIntro": "نحن شركة تبتكر حلولًا رقمية تصنع الفرق في رحلة نجاحك... مع إمكان.",
   "AboutPoint1": "نقدّم خدمات تطوير الأنظمة  بجودة عالية مصممة لتناسب احتياجات عملائنا.",
   "AboutPoint2": "يجمع فريقنا بين الإبداع والخبرة التقنية والتفكير الاستراتيجي لتحقيق نتائج فعالة.",
   "AboutPoint3": "نؤمن بالتحسين المستمر والشفافية وبناء شراكات طويلة الأمد مع عملائنا.",
-  "AboutConclusion": "في MCan، نسعى لتمكين أعمالك بالتقنية المناسبة لتحقيق النجاح في العصر الرقمي."
+  "AboutConclusion": "نسعى لتمكين أعمالك بأحدث الحلول التقنية لنصنع معًا قصة نجاحك في العالم الرقمي... مع إمكان.",
 
+
+  "Our Services": "خدماتنا",
+  "Check our Services": "تعرّف على خدماتنا",
+
+  "Point of Sale Systems": "أنظمة نقاط البيع الذكية",
+  "Point of Sale Desc": "أنظمة متطورة تساعدك على إدارة المبيعات والمخزون والفواتير بكفاءة عالية، لتبسيط عمل متجرك وتحقيق أداء أسرع وأكثر دقة.",
+
+  "Clinic & Hospital Systems": "أنظمة العيادات والمستشفيات",
+  "Clinic & Hospital Desc": "حلول رقمية شاملة لإدارة المرضى والمواعيد والفواتير لتجعل تجربة الرعاية الصحية أكثر تنظيمًا وفعالية.",
+
+  "Sales & Inventory": "أنظمة المبيعات والمخزون",
+  "Sales & Inventory Desc": "تتبّع المبيعات ومستويات المخزون والتقارير بسهولة باستخدام أنظمتنا الذكية التي تمنحك رؤية واضحة لأداء عملك.",
+
+  "Photo & Printing Shops": "أنظمة إدارة استوديوهات التصوير والمطابع",
+  "Photo & Printing Desc": "نقدّم حلولاً رقمية لإدارة الطلبات وعمليات الطباعة وتنظيم المهام لتلبية احتياجات متجرك الإبداعي بسهولة.",
+
+  "Rental & Leasing Stores": "أنظمة التأجير وإدارة المتاجر",
+  "Rental & Leasing Desc": "أنظمة رقمية متكاملة لإدارة عمليات التأجير والعقود والمخزون بكل مرونة واحترافية.",
+
+  "Custom Digital Solutions": "حلول رقمية مخصصة",
+  "Custom Digital Desc": "نصمّم أنظمة مخصصة لاحتياجات عملك تساعدك على الأتمتة وزيادة الإنتاجية وتحسين تجربة عملائك.",
+
+  "Our Clients": "عملاؤنا",
+  "Check our Clients": "تعرّف على عملائنا",
+  "Load more": "عرض المزيد",
+
+
+  "Get Started Now with Our Digital Solutions!": "ابدأ الآن مع حلولنا الرقمية!",
+  "CallToAction Des": "طوّر إدارة عملك، سواء في أنظمة نقاط البيع أو العيادات أو المستشفيات أو المتاجر، من خلال حلول رقمية سريعة وسهلة.",
+  "Contact Us Now": "تواصل معنا الآن",
+
+
+
+  "portfolio.sectionTitle": "مشاريعنا",
+  "Check our Portfolio": "تعرّف على أعمالنا المميزة التي تعكس إبداعنا وخبرتنا.",
+  "All": "الكل",
+  "Applications": "تطبيقات",
+  "Products": "منتجات",
+  "Websites": "مواقع ويب",
+  "More Details": "المزيد من التفاصيل",
+
+
+
+
+  "StatsTitle": "إنجازاتنا",
+  "StatsDescription": "نقدم حلول رقمية مبتكرة للأعمال من جميع الأحجام. من أنظمة نقاط البيع إلى إدارة العيادات، نضمن برمجيات سريعة وموثوقة ومخصصة لاحتياجاتك.",
+  "StatsHappyClients": "عملاء سعداء",
+  "StatsProjects": "المشاريع",
+  "StatsHoursSupport": "ساعات الدعم",
+  "StatsHardWorkers": "العاملون المجتهدون",
+  "StatsHappyClientsCount": 20,
+  "StatsProjectsCount": 20,
+  "StatsHoursSupportCount": 800,
+  "StatsHardWorkersCount": 10,
+
+
+  "contact title": "اتصل بنا",
+  "contact subtitle": "تواصل معنا",
+  "contact info address": "العنوان",
+  "contact info addressValue": "ميدان العروبة، أبراج المهندسين، البرج رقم 5",
+  "contact info call": "اتصل بنا",
+  "contact info callValue1": "+201105693401",
+  "contact info callValue2": "+201070732605",
+  "contact info callValue3": "+201070732613",
+  "contact info email": "البريد الإلكتروني",
+  "contact info emailValue": "m.can.group.01@gmail.com",
+  "contact form namePlaceholder": "الاسم الكامل",
+  "contact form emailPlaceholder": "البريد الإلكتروني",
+  "contact form phonePlaceholder": "رقم الهاتف",
+  "contact form messagePlaceholder": "اكتب رسالتك هنا...",
+  "contact form sendButton": "إرسال الرسالة",
+
+
+  "footer usefulLinks": "روابط مفيدة",
+  "footer home": "الرئيسية",
+  "footer about": "من نحن",
+  "footer services": "الخدمات",
+  "footer projects": "المشروعات",
+  "footer ourServices": "خدماتنا",
+  "footer posSystems": "أنظمة نقاط البيع",
+  "footer clinicSystems": "أنظمة العيادات والمستشفيات",
+  "footer salesInventory": "أنظمة المبيعات والكاشير ",
+  "footer photoPrinting": "محلات الطباعة والتصوير",
+  "footer rentalStores": "محلات التأجير",
+  "footer customSolutions": "حلول رقمية مخصصة"
 
 }
-
 

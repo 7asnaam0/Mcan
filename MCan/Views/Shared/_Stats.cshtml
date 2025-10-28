@@ -1,4 +1,11 @@
-﻿<!-- Stats Section -->
+﻿@inject MCan.Services.JsonLocalizationService Localizer
+@using System.Globalization
+@{
+    var isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    var iconMarginClass = isArabic ? "ms-3" : "me-3";
+}
+
+<!-- Stats Section -->
 <section id="stats" class="stats section">
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -11,52 +18,50 @@
 
             <div class="col-lg-6">
 
-                <h3 class="fw-bold fs-2 mb-3">Our Achievements</h3>
-                <p>
-
-                    Providing innovative digital solutions for businesses of all sizes. From point-of-sale systems to clinic management, we ensure fast, reliable, and tailored software for your needs.
+                <h3 class="fw-bold fs-2 mb-3">@Localizer.Get("StatsTitle")</h3>
+                <p>@Localizer.Get("StatsDescription")</p>
 
                 <div class="row gy-4">
 
                     <div class="col-lg-6">
                         <div class="stats-item d-flex">
-                            <i class="bi bi-emoji-smile flex-shrink-0"></i>
-                            <div>
+                            <i class="bi bi-emoji-smile flex-shrink-0 @iconMarginClass"></i>
+                            <div class="stat-text">
                                 <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="1" class="purecounter"></span>
-                                <p><strong>Happy Clients</strong></p>
+                                <p><strong>@Localizer.Get("StatsHappyClients")</strong></p>
                             </div>
                         </div>
-                    </div><!-- End Stats Item -->
+                    </div>
 
                     <div class="col-lg-6">
                         <div class="stats-item d-flex">
-                            <i class="bi bi-journal-richtext flex-shrink-0"></i>
-                            <div>
+                            <i class="bi bi-journal-richtext flex-shrink-0 @iconMarginClass"></i>
+                            <div class="stat-text">
                                 <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="1" class="purecounter"></span>
-                                <p><strong>Projects</strong> </p>
+                                <p><strong>@Localizer.Get("StatsProjects")</strong></p>
                             </div>
                         </div>
-                    </div><!-- End Stats Item -->
+                    </div>
 
                     <div class="col-lg-6">
                         <div class="stats-item d-flex">
-                            <i class="bi bi-headset flex-shrink-0"></i>
-                            <div>
+                            <i class="bi bi-headset flex-shrink-0 @iconMarginClass"></i>
+                            <div class="stat-text">
                                 <span data-purecounter-start="0" data-purecounter-end="800" data-purecounter-duration="1" class="purecounter"></span>
-                                <p><strong>Hours Of Support</strong></p>
+                                <p><strong>@Localizer.Get("StatsHoursSupport")</strong></p>
                             </div>
                         </div>
-                    </div><!-- End Stats Item -->
+                    </div>
 
                     <div class="col-lg-6">
                         <div class="stats-item d-flex">
-                            <i class="bi bi-people flex-shrink-0"></i>
-                            <div>
+                            <i class="bi bi-people flex-shrink-0 @iconMarginClass"></i>
+                            <div class="stat-text">
                                 <span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>
-                                <p><strong>Hard Workers</strong></p>
+                                <p><strong>@Localizer.Get("StatsHardWorkers")</strong></p>
                             </div>
                         </div>
-                    </div><!-- End Stats Item -->
+                    </div>
 
                 </div>
 
@@ -66,4 +71,20 @@
 
     </div>
 
-</section><!-- /Stats Section -->
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.documentElement.lang === 'ar') {
+                const arabicDigits = ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+                document.querySelectorAll('.purecounter').forEach(el => {
+                    // تحويل الأرقام للعربي
+                    el.textContent = el.textContent.replace(/\d/g, d => arabicDigits[d]);
+                    // إضافة مسافة بعد الرقم
+                    el.textContent += " ";
+                });
+            }
+        });
+    </script>
+}

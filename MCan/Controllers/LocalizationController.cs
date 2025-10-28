@@ -1,21 +1,30 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
-public class LocalizationController : Controller
+namespace MCan.Controllers
 {
-    [HttpPost]
-    public IActionResult SetLanguage(string culture, string returnUrl = "/")
+    public class LocalizationController : Controller
     {
-        Response.Cookies.Append(
-            CookieRequestCultureProvider.DefaultCookieName,
-            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-            new CookieOptions
-            {
-                Expires = DateTimeOffset.UtcNow.AddYears(1),
-                IsEssential = true  // Make sure cookie works even if consent not given
-            }
-        );
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string? returnUrl = null)
+        {
+            if (string.IsNullOrEmpty(culture))
+                culture = "en";
 
-        return LocalRedirect(returnUrl);
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1),
+                    IsEssential = true
+                }
+            );
+
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                return LocalRedirect(returnUrl);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

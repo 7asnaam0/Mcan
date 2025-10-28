@@ -1,26 +1,120 @@
 ﻿{
 
   "Powerful Digital Solutions With": "Powerful Digital Solutions With",
-  "Smart and practical software for real business needs.": "Smart and practical software for real business needs.",
+  "descraption": "Smart and practical software for real business needs.",
+
   "Smart Software Solutions": "Smart Software Solutions",
   "Flexible and Scalable Design": "Flexible and Scalable Design",
   "Experienced and Passionate Team": "Experienced and Passionate Team",
   "Quality and Security You Can Trust": "Quality and Security You Can Trust",
   "Continuous Technical Support": "Continuous Technical Support",
+  "Mcan": "Mcan",
+
+
   "Home": "Home",
   "About": "About",
   "Services": "Services",
   "Portfolio": "Portfolio",
-  "Team": "Team",
   "Contact": "Contact",
   "Language": "Language",
-  "Get Started": "Get Started",
+
+
   "AboutTitle": "Who We Are",
   "AboutIntro": "MCan is a modern technology company that provides smart digital solutions to help businesses grow and innovate.",
   "AboutPoint1": "We offer high-quality web development services tailored to your needs.",
   "AboutPoint2": "Our team combines creativity, technical expertise, and strategic thinking to deliver impactful results.",
   "AboutPoint3": "We believe in continuous improvement, transparency, and building long-term partnerships with our clients.",
-  "AboutConclusion": "At MCan, our mission is to empower your business with the right technology to succeed in the digital age."
+  "AboutConclusion": "At MCan, our mission is to empower your business with the right technology to succeed in the digital age.",
 
+
+
+
+  "Our Services": "Our Services",
+  "Check our Services": "Check our Services",
+
+  "Point of Sale Systems": "Point of Sale Systems",
+  "Point of Sale Desc": "Advanced POS systems to manage sales, inventory, and billing efficiently, making your store faster and smarter.",
+
+  "Clinic & Hospital Systems": "Clinic & Hospital Systems",
+  "Clinic & Hospital Desc": "Comprehensive digital solutions for clinics and hospitals to manage patients, appointments, and billing seamlessly.",
+
+  "Sales & Inventory": "Sales & Inventory",
+  "Sales & Inventory Desc": "Easily track sales, stock levels, and reports using our intelligent inventory management systems.",
+
+  "Photo & Printing Shops": "Photo & Printing Shops",
+  "Photo & Printing Desc": "Tailored digital tools for photo studios and print shops to manage orders, jobs, and clients efficiently.",
+
+  "Rental & Leasing Stores": "Rental & Leasing Stores",
+  "Rental & Leasing Desc": "Smart systems for rental businesses to track inventory, manage contracts, and streamline operations.",
+
+  "Custom Digital Solutions": "Custom Digital Solutions",
+  "Custom Digital Desc": "We create customized digital systems to automate your operations, enhance productivity, and improve customer experience.",
+
+
+  "Our Clients": "Our Clients",
+  "Check our Clients": "Check our Clients",
+  "Load more": "Load more",
+
+
+
+  "Get Started Now with Our Digital Solutions!": "Get Started Now with Our Digital Solutions!",
+  "CallToAction Des": "Enhance your business management, whether POS systems, clinics, hospitals, or shops, with fast and easy digital solutions.",
+  "Contact Us Now": "Contact Us Now",
+
+
+  "portfolio.sectionTitle": "Our Projects",
+  "Check our Portfolio": "Check our portfolio and discover our creative work.",
+  "All": "All",
+  "Applications": "Applications",
+  "Products": "Products",
+  "Websites": "Websites",
+  "More Details": "More Details",
+
+
+
+  "StatsTitle": "Our Achievements",
+  "StatsDescription": "Providing innovative digital solutions for businesses of all sizes. From point-of-sale systems to clinic management, we ensure fast, reliable, and tailored software for your needs.",
+  "StatsHappyClients": "Happy Clients",
+  "StatsProjects": "Projects",
+  "StatsHoursSupport": "Hours Of Support",
+  "StatsHardWorkers": "Hard Workers",
+  "StatsHappyClientsCount": 20,
+  "StatsProjectsCount": 20,
+  "StatsHoursSupportCount": 800,
+  "StatsHardWorkersCount": 10,
+
+
+
+  "contact title": "Contact",
+  "contact subtitle": "Contact Us",
+  "contact info address": "Address",
+  "contact info addressValue": "Al-Oruba Square, Al-Mohandessin Towers, Tower No. 5",
+  "contact info call": "Call Us",
+  "contact info callValue1": "+201105693401",
+  "contact info callValue2": "+201070732605",
+  "contact info callValue3": "+201070732613",
+  "contact info email": "Email Us",
+  "contact info emailValue": "m.can.group.01@gmail.com",
+  "contact form namePlaceholder": "Full Name",
+  "contact form emailPlaceholder": "Email",
+  "contact form phonePlaceholder": "Phone Number",
+  "contact form messagePlaceholder": "Write your message here...",
+  "contact form sendButton": "Send Message",
+
+
+
+
+  "footer usefulLinks": "Useful Links",
+  "footer home": "Home",
+  "footer about": "About us",
+  "footer services": "Services",
+  "footer projects": "Our projects",
+  "footer ourServices": "Our Services",
+  "footer posSystems": "Point of Sale Systems",
+  "footer clinicSystems": "Clinic & Hospital Systems",
+  "footer salesInventory": "Sales & Inventory",
+  "footer photoPrinting": "Photo & Printing Shops",
+  "footer rentalStores": "Rental & Leasing Stores",
+  "footer customSolutions": "Custom Digital Solutions"
 
 }

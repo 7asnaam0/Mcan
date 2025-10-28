@@ -1,149 +1,132 @@
 ﻿@model Models.ContactMessage
 @inject MCan.Services.JsonLocalizationService Localizer
-@using Microsoft.Extensions.Localization
 @using System.Globalization
+
 @{
-    var iconMarginClass = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar" ? "ms-3" : "me-3";
     var isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
-    var linkDirection = isArabic ? "rtl" : "ltr";
-    var iconClass = isArabic ? "bi bi-arrow-left ms-2" : "bi bi-arrow-right ms-2";
+    var dir = isArabic ? "rtl" : "ltr";
+    var textAlign = isArabic ? "text-end" : "text-start";
+    var iconMarginClass = isArabic ? "ms-3" : "me-3"; 
 }
 
-<section id="contact" class="contact section">
-
-    <!-- Section Title -->
+<!-- Contact Section -->
+<section id="contact" class="contact section" dir="@dir">
     <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Contact Us</p>
-    </div><!-- End Section Title -->
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
-            <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d605.0192794495807!2d31.692899730228003!3d26.552331440807993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2seg!4v1761554031005!5m2!1sar!2seg" width="600" height="450"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-           
-        </div><!-- End Google Maps -->
-
-        <div class="row gy-4">
-
-            <div class="col-lg-4">
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                    <i class="bi bi-geo-alt flex-shrink-0"></i>
-                    <div>
-                        <h3>Address</h3>
-                        <p>Al-Oruba Square, Al-Mohandessin Towers, Tower No. 5</p>
-                    </div>
-                </div><!-- End Info Item -->
-
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                    <i class="bi bi-telephone flex-shrink-0"></i>
-                    <div>
-                        <h3>Call Us</h3>
-                        <p>+201105693401</p>
-                        <p>+201070732605 </p>
-                        <p>+201070732613 </p>
-                    </div>
-                </div><!-- End Info Item -->
-
-                <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-                    <i class="bi bi-envelope flex-shrink-0"></i>
-                    <div>
-                        <h3>Email Us</h3>
-                        <p>m.can.group.01@gmail.com</p>
-                    </div>
-                </div><!-- End Info Item -->
-
-            </div>
-
-            <div class="col-lg-8">
-                <form method="post" id="contactForm" class="custom-contact-form" data-aos="fade-up" data-aos-delay="200">
-                        @Html.AntiForgeryToken()
-                    <div class="row gy-4">
-
-                        <div class="col-md-6">
-                            <input asp-for="Name" class="form-control" placeholder="@Localizer.Get("contact.form.namePlaceholder")" required />
-                            <span asp-validation-for="Name" class="text-danger" data-valmsg-for="Name"></span>
-                        </div>
-
-                        <div class="col-md-6 ">
-                            <input asp-for="Email" class="form-control" placeholder="@Localizer.Get("contact.form.emailPlaceholder")" required />
-                            <span asp-validation-for="Email" class="text-danger" data-valmsg-for="Email"></span>
-                        </div>
-
-                        <div class="col-md-12">
-                            <input asp-for="PhoneNumber" class="form-control" placeholder="@Localizer.Get("contact.form.phonePlaceholder")" required />
-                            <span asp-validation-for="PhoneNumber" class="text-danger" data-valmsg-for="PhoneNumber"></span>
-                        </div>
-
-                        <div class="col-md-12">
-                                <textarea asp-for="Message" class="form-control" rows="6" placeholder="@Localizer.Get("contact.form.messagePlaceholder")" required></textarea>
-                                <span asp-validation-for="Message" class="text-danger" data-valmsg-for="Message"></span>
-                        </div>
-
-                        <div class="col-md-12 text-center">
-                            <div class="loading" style="display:none;">Loading...</div>
-
-                            <button type="submit">Send Message</button>
-                        </div>
-
-                    </div>
-                </form>
-                <div id="formStatus" style="margin-top:10px; text-align:center; display:none;"></div> 
-
-            </div><!-- End Contact Form -->
-
-        </div>
-
+        <h2>@Localizer.Get("contact title")</h2>
+        <p>@Localizer.Get("contact subtitle")</p>
     </div>
 
-</section><!-- /Contact Section -->
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
+            <iframe style="border:0; width:100%; height:270px;"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d605.0192794495807!2d31.692899730228003!3d26.552331440807993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2seg!4v1761554031005!5m2!1sar!2seg"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="row gy-4">
+            <!-- Contact Info -->
+            <div class="col-lg-4">
+                <div class="info-item d-flex mb-3" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-geo-alt flex-shrink-0 me-3 @iconMarginClass"></i>
+                    <div class="@textAlign">
+                        <h3>@Localizer.Get("contact info address")</h3>
+                        <p>@Localizer.Get("contact info addressValue")</p>
+                    </div>
+                </div>
+
+                <div class="info-item d-flex mb-3" data-aos="fade-up" data-aos-delay="400">
+                    <i class="bi bi-telephone flex-shrink-0 me-3 @iconMarginClass"></i>
+                    <div class="@textAlign">
+                        <h3>@Localizer.Get("contact info call")</h3>
+                        <p>@Localizer.Get("contact info callValue1")</p>
+                        <p>@Localizer.Get("contact info callValue2")</p>
+                        <p>@Localizer.Get("contact info callValue3")</p>
+                    </div>
+                </div>
+
+                <div class="info-item d-flex mb-3" data-aos="fade-up" data-aos-delay="500">
+                    <i class="bi bi-envelope flex-shrink-0 me-3 @iconMarginClass"></i>
+                    <div class="@textAlign">
+                        <h3>@Localizer.Get("contact info email")</h3>
+                        <p>@Localizer.Get("contact info emailValue")</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <form method="post" id="contactForm" class="custom-contact-form" data-aos="fade-up" data-aos-delay="200">
+                    @Html.AntiForgeryToken()
+                    <div class="row gy-3">
+                        <div class="col-md-6">
+                            <input asp-for="Name" class="form-control" placeholder="@Localizer.Get("contact form namePlaceholder")" required />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <input asp-for="Email" class="form-control" placeholder="@Localizer.Get("contact form emailPlaceholder")" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="@Localizer.Get("contact form phonePlaceholder")" required />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea asp-for="Message" class="form-control" rows="6" placeholder="@Localizer.Get("contact form messagePlaceholder")" required></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 text-center mt-3">
+                            <div class="loading" style="display:none;">Loading...</div>
+                            <button type="submit" class="btn btn-primary">@Localizer.Get("contact form sendButton")</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="formStatus" class="text-center mt-2" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Optional: Load More Clients Script -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-      const wrapper = document.getElementById('clients-wrapper');
+    const wrapper = document.getElementById('clients-wrapper');
     const btn = document.getElementById('loadMoreClients');
-    if (!btn) return;
-
-    btn.addEventListener('click', async function () {
-        const skip = parseInt(btn.getAttribute('data-skip') || '0');
-        const total = parseInt(btn.getAttribute('data-total') || '0');
-        btn.disabled = true;
-        btn.textContent = 'Loading...';
-
-        try {
-            const res = await fetch(`/Client/GetMore?skip=${skip}`);
-            if (!res.ok) throw new Error('Request failed');
-            const data = await res.json();
-            const items = data.items || [];
-
-            if (items.length === 0) {
-                btn.parentElement.style.display = 'none';
-                return;
-            }
-
-            items.forEach(it => {
-                const div = document.createElement('div');
-                div.className = 'client-item';
-                const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
-                div.innerHTML = `<img src="${imgSrc}" class="img-fluid" alt="${it.name}" />`;
-                wrapper.appendChild(div);
-            });
-
-            const newSkip = skip + items.length;
-            btn.setAttribute('data-skip', newSkip);
-
-            if (newSkip >= total) {
-                btn.parentElement.style.display = 'none';
-            } else {
+    if (btn) {
+        btn.addEventListener('click', async function () {
+            const skip = parseInt(btn.getAttribute('data-skip') || '0');
+            const total = parseInt(btn.getAttribute('data-total') || '0');
+            btn.disabled = true;
+            btn.textContent = 'Loading...';
+            try {
+                const res = await fetch(`/Client/GetMore?skip=${skip}`);
+                if (!res.ok) throw new Error('Request failed');
+                const data = await res.json();
+                const items = data.items || [];
+                if (!items.length) {
+                    btn.parentElement.style.display = 'none';
+                    return;
+                }
+                items.forEach(it => {
+                    const div = document.createElement('div');
+                    div.className = 'client-item';
+                    const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
+                    div.innerHTML = `<img src="${imgSrc}" class="img-fluid" alt="${it.name}" />`;
+                    wrapper.appendChild(div);
+                });
+                const newSkip = skip + items.length;
+                btn.setAttribute('data-skip', newSkip);
+                if (newSkip >= total) {
+                    btn.parentElement.style.display = 'none';
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Load more';
+                }
+            } catch (err) {
+                console.error(err);
                 btn.disabled = false;
                 btn.textContent = 'Load more';
+                alert('Error loading more clients.');
             }
-
-        } catch (err) {
-            console.error(err);
-            btn.disabled = false;
-            btn.textContent = 'Load more';
-            alert('Error loading more clients.');
-        }
-    });
-
+        });
+    }
 </script>

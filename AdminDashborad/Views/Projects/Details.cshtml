@@ -34,7 +34,7 @@
             <label class="form-label fw-bold">Project Image:</label><br />
             @if (!string.IsNullOrEmpty(Model.ImageUrl))
             {
-                <img src="@Model.ImageUrl" alt="Project Image" class="img-thumbnail" style="max-height: 250px;" />
+                <img src="~/images/@Model.ImageUrl" alt="Project Image" class="img-thumbnail" style="max-height: 250px;" />
             }
             else
             {

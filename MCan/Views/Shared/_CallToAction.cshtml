@@ -1,15 +1,17 @@
-﻿    <!-- Call To Action Section -->
+﻿@using System.Globalization
+@inject MCan.Services.JsonLocalizationService Localizer
+<!-- Call To Action Section -->
 <section id="call-to-action" class="call-to-action section dark-background">
 
     <img src="~/assets/cta-bg.jpg" alt="">
 
-    <div class="container">
+ <div class="container">
         <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
             <div class="col-xl-10">
                 <div class="text-center">
-                    <h3>Get Started Now with Our Digital Solutions!</h3>
-                    <p>Enhance your business management, whether POS systems, clinics, hospitals, or shops, with fast and easy digital solutions.</p>
-                    <a class="cta-btn" href="#contact">Contact Us Now</a>
+                    <h3>@Localizer.Get("Get Started Now with Our Digital Solutions!")</h3>
+                    <p>@Localizer.Get("CallToAction Des")</p>
+                    <a class="cta-btn" href="#contact">@Localizer.Get("Contact Us Now")</a>
                 </div>
             </div>
         </div>

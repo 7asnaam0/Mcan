@@ -1,4 +1,9 @@
-﻿
+﻿@inject MCan.Services.JsonLocalizationService Localizer
+@using System.Globalization
+
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+}
 
 @model IEnumerable<Models.Client>
 @{
@@ -8,11 +13,11 @@
 }
 
 
-<section id="clients" class="clients section">
-        <div class="container section-title" data-aos="fade-up">
-        <h2>Our Clients</h2>
-        <p>Check our Clients</p>
-        </div>
+<section id="clients" class="clients section" dir="@(currentCulture == "ar" ? "rtl" : "ltr")">
+    <div class="container section-title" data-aos="fade-up">
+        <h2>@Localizer.Get("Our Clients")</h2>
+        <p>@Localizer.Get("Check our Clients")</p>
+    </div>
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="swiper init-swiper">
       <script type="application/json" class="swiper-config">
@@ -34,7 +39,7 @@
                 @foreach (var client in Model)
                 {
                     <div class="client-item">
-                        <img src="@(string.IsNullOrEmpty(client.Image) ? Url.Content("~/assets/img/clients/placeholder.png") : client.Image)"
+                        <img src="@($"{ViewBag.BaseUrl}/images/{client.Image}")"
                              class="img-fluid" alt="@client.Name" />
                     </div>
                 }

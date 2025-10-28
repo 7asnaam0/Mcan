@@ -66,8 +66,8 @@ namespace McanDashBorad.Controllers
                         await ImageFile.CopyToAsync(fileStream);
                     }
 
-                    var baseUrl = $"{Request.Scheme}://{Request.Host}";
-                    client.Image = $"{baseUrl}/images/{uniqueFileName}";
+                    // نحفظ فقط اسم الصورة
+                    client.Image = uniqueFileName;
                 }
                 else
                 {
@@ -104,9 +104,11 @@ namespace McanDashBorad.Controllers
                 {
                     if (ImageFile != null && ImageFile.Length > 0)
                     {
-                        if (!string.IsNullOrEmpty(client.Image))
+                        // نحذف الصورة القديمة لو موجودة
+                        var oldClient = await _context.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+                        if (!string.IsNullOrEmpty(oldClient?.Image))
                         {
-                            string oldImagePath = Path.Combine(_env.WebRootPath, client.Image.Replace($"{Request.Scheme}://{Request.Host}/", "").TrimStart('/'));
+                            string oldImagePath = Path.Combine(_env.WebRootPath, "images", oldClient.Image);
                             if (System.IO.File.Exists(oldImagePath))
                                 System.IO.File.Delete(oldImagePath);
                         }
@@ -123,11 +125,11 @@ namespace McanDashBorad.Controllers
                             await ImageFile.CopyToAsync(fileStream);
                         }
 
-                        var baseUrl = $"{Request.Scheme}://{Request.Host}";
-                        client.Image = $"{baseUrl}/images/{uniqueFileName}";
+                        client.Image = uniqueFileName;
                     }
                     else
                     {
+                        // نحتفظ بالاسم القديم
                         var oldClient = await _context.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
                         client.Image = oldClient?.Image;
                     }
@@ -147,15 +149,14 @@ namespace McanDashBorad.Controllers
 
         // POST: Clients/Delete/5
         [HttpPost]
-        [ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var client = await _context.Clients.FindAsync(id);
             if (client != null)
             {
                 if (!string.IsNullOrEmpty(client.Image))
                 {
-                    string imagePath = Path.Combine(_env.WebRootPath, client.Image.Replace($"{Request.Scheme}://{Request.Host}/", "").TrimStart('/'));
+                    string imagePath = Path.Combine(_env.WebRootPath, "images", client.Image);
                     if (System.IO.File.Exists(imagePath))
                         System.IO.File.Delete(imagePath);
                 }
