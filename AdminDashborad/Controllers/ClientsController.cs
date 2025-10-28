@@ -50,35 +50,38 @@ namespace McanDashBorad.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Client client, IFormFile? ImageFile)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(client);
+
+            // تحديد مسار مجلد الصور داخل wwwroot
+            string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+
+            // إنشاء المجلد لو مش موجود
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            if (ImageFile != null && ImageFile.Length > 0)
             {
-                if (ImageFile != null && ImageFile.Length > 0)
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                    if (!Directory.Exists(uploadsFolder))
-                        Directory.CreateDirectory(uploadsFolder);
-
-                    string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await ImageFile.CopyToAsync(fileStream);
-                    }
-
-                    // نحفظ فقط اسم الصورة
-                    client.Image = uniqueFileName;
-                }
-                else
-                {
-                    client.Image = null;
+                    await ImageFile.CopyToAsync(fileStream);
                 }
 
-                _context.Add(client);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // نحفظ فقط اسم الصورة
+                client.Image = uniqueFileName;
             }
-            return View(client);
+            else
+            {
+                client.Image = null;
+            }
+
+            _context.Add(client);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Clients/Edit/5

@@ -53,12 +53,15 @@ namespace McanDashBorad.Controllers
             if (!ModelState.IsValid)
                 return View(project);
 
+            // تحديد مسار مجلد الصور داخل wwwroot
+            string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+
+            // إنشاء المجلد لو مش موجود
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
             if (ImageFile != null && ImageFile.Length > 0)
             {
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                if (!Directory.Exists(uploadsFolder))
-                    Directory.CreateDirectory(uploadsFolder);
-
                 string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(ImageFile.FileName);
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
