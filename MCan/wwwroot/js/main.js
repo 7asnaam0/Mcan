@@ -109,17 +109,27 @@
      */
     function initSwiper() {
         document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
-            let config = JSON.parse(
-                swiperElement.querySelector(".swiper-config").innerHTML.trim()
-            );
+            const configEl = swiperElement.querySelector(".swiper-config");
+            if (!configEl) return; // ??? ?? ???? config ????? ??? ??????
+
+            let config;
+            try {
+                config = JSON.parse(configEl.innerHTML.trim());
+            } catch (e) {
+                console.error("Swiper config JSON is invalid", e);
+                return;
+            }
 
             if (swiperElement.classList.contains("swiper-tab")) {
-                initSwiperWithCustomPagination(swiperElement, config);
+                if (typeof initSwiperWithCustomPagination === "function") {
+                    initSwiperWithCustomPagination(swiperElement, config);
+                }
             } else {
                 new Swiper(swiperElement, config);
             }
         });
     }
+
 
     window.addEventListener("load", initSwiper);
 
@@ -173,9 +183,10 @@
      */
     window.addEventListener('load', function (e) {
         if (window.location.hash) {
-            if (document.querySelector(window.location.hash)) {
+            const hash = window.location.hash;
+            const section = document.querySelector(hash);
+            if (section) {
                 setTimeout(() => {
-                    let section = document.querySelector(window.location.hash);
                     let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
                     window.scrollTo({
                         top: section.offsetTop - parseInt(scrollMarginTop),
@@ -185,6 +196,7 @@
             }
         }
     });
+
 
     /**
      * Navmenu Scrollspy

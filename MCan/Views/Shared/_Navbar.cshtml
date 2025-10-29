@@ -1,16 +1,20 @@
-﻿@inject MCan.Services.JsonLocalizationService Localizer
-@using System.Globalization
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Html
+@inject MCan.Services.JsonLocalizationService Localizer
 
 @{
     var currentCulture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var companyName = currentCulture == "ar"
+    ? new HtmlString("إمكان")
+    : new HtmlString("M<span class=\"dot\">.</span>CAN");
 }
 
 <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
     <!-- اللوجو -->
-    <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+    <a href="/" class="logo d-flex align-items-center @(currentCulture == "ar" ? "ms-auto" : "me-auto")">
         <img src="~/assets/logo.png" alt="">
-        <h1 class="sitename">M<span>.</span>CAN</h1>
+        <h1 class="sitename"> @companyName</h1>
     </a>
 
     <!-- الناف بار -->
@@ -21,26 +25,35 @@
             <li><a href="#services">@Localizer.Get("Services")</a></li>
             <li><a href="#portfolio">@Localizer.Get("Portfolio")</a></li>
             <li><a href="#contact">@Localizer.Get("Contact")</a></li>
-
-            <li>
-                <form method="post" asp-controller="Localization" asp-action="SetLanguage" id="langForm" class="d-inline">
-                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
-                    <select name="culture"
-                            onchange="document.getElementById('langForm').submit()"
-                            style="width:auto; display:inline-block; background:transparent; border:none; color:white;">
-                        @if (currentCulture == "en")
-                        {
-                            <option value="en" selected>English</option>
-                            <option value="ar">العربية</option>
-                        }
-                        else
-                        {
-                            <option value="en">English</option>
-                            <option value="ar" selected>العربية</option>
-                        }
-                    </select>
-                </form>
+            <li class="dropdown">
+                <a href="#">
+                    <span>@(currentCulture == "ar" ? "العربية" : "English")</span>
+                    <i class="bi bi-chevron-down toggle-dropdown"></i>
+                </a>
+                <ul>
+                    @if (currentCulture != "en")
+                    {
+                        <li>
+                            <form method="post" asp-controller="Localization" asp-action="SetLanguage" class="d-inline">
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                <input type="hidden" name="culture" value="en" />
+                                <a href="#" onclick="this.closest('form').submit(); return false;">English</a>
+                            </form>
+                        </li>
+                    }
+                    @if (currentCulture != "ar")
+                    {
+                        <li>
+                            <form method="post" asp-controller="Localization" asp-action="SetLanguage" class="d-inline">
+                                <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                                <input type="hidden" name="culture" value="ar" />
+                                <a href="#" onclick="this.closest('form').submit(); return false;">العربية</a>
+                            </form>
+                        </li>
+                    }
+                </ul>
             </li>
+
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

@@ -14,9 +14,7 @@
     <title>M.Can</title>
     <script type="importmap"></script>
 
-    <!-- Favicons -->
-    <link href="~/assets/img/favicon.png" rel="icon">
-    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -35,6 +33,13 @@
     <link href="css/main.css" rel="stylesheet">
 </head>
 <body class="index-page" class="@(isArabic ? "rtl-body" : "ltr-body")">
+    <!-- Loader -->
+    <div id="pageLoader" class="loader">
+        <span>M</span>
+        <span>C</span>
+        <span>a</span>
+        <span>n</span>
+    </div>
 
     <header id="header" class="header d-flex align-items-center fixed-top">
         <partial name="_Navbar" />
@@ -60,13 +65,29 @@
     </a>
 
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/vendor/custom-contact-form/validate.js"></script>
     <script src="~/vendor/aos/aos.js"></script>
     <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="~/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            const loader = document.getElementById('pageLoader');
+            if(loader){
+                // يظل ظاهر 3 ثواني بدل 2
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    // زيادة مدة التلاشي لـ 1 ثانية بدل 0.5
+                    loader.style.transition = 'opacity 1s ease';
+                    // بعد انتهاء التلاشي، نخفيه نهائيًا
+                    setTimeout(() => { loader.style.display = 'none'; }, 1000); // 1000ms = 1 ثانية
+                }, 1000); // 3000ms = 3 ثواني
+            }
+        });
+    </script>
+
+
 
     <!-- Main JS File -->
     <script src="~/js/main.js"></script>

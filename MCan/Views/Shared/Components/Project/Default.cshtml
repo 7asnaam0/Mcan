@@ -7,6 +7,8 @@
     ViewData["Title"] = Localizer.Get("portfolio.sectionTitle");
     var imageBaseUrl = Configuration["ImageSettings:ImageBaseUrl"];
     var isArabic = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ar";
+    var iconMarginClass = isArabic ? "ms-3" : "me-3";
+
 }
 
 <section id="portfolio" class="portfolio section" @(isArabic ? "dir='rtl'" : "dir='ltr'")>
@@ -29,21 +31,23 @@
                         <img src="@($"{ViewBag.BaseUrl}/images/{project.ImageUrl}")" class="img-fluid" alt="@title" />
                         @if (isArabic)
                         {
-                            <div class="portfolio-info d-flex flex-row align-items-start">
-                                <div style="text-align:right; flex:1;">
+                            <div class="portfolio-info d-flex flex-row align-items-center justify-content-between">
+                                <div style="text-align:right; flex:1; padding-right: 10px;">
+                                    <!-- هنا زدنا padding-right -->
                                     <h4>@title</h4>
                                     <p>@description</p>
                                 </div>
 
-                                <div style="margin-left:10px;">
-                                    <a href="@($"{ViewBag.BaseUrl}/images/{project.ImageUrl}")"
-                                       title="@title"
-                                       data-gallery="portfolio-gallery-app"
-                                       class="glightbox preview-link d-flex justify-content-start">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
+                                <a href="@($"{ViewBag.BaseUrl}/images/{project.ImageUrl}")"
+                                   title="@title"
+                                   data-gallery="portfolio-gallery-app"
+                                   class="glightbox preview-link d-flex align-items-center">
+                                    <i class="bi bi-zoom-in ms-2" style="font-size: 1.2rem;"></i>
+                                </a>
                             </div>
+
+
+
                         }
 
 

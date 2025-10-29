@@ -89,44 +89,39 @@
 <!-- Optional: Load More Clients Script -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    const wrapper = document.getElementById('clients-wrapper');
-    const btn = document.getElementById('loadMoreClients');
-    if (btn) {
-        btn.addEventListener('click', async function () {
-            const skip = parseInt(btn.getAttribute('data-skip') || '0');
-            const total = parseInt(btn.getAttribute('data-total') || '0');
-            btn.disabled = true;
-            btn.textContent = 'Loading...';
-            try {
-                const res = await fetch(`/Client/GetMore?skip=${skip}`);
-                if (!res.ok) throw new Error('Request failed');
-                const data = await res.json();
-                const items = data.items || [];
-                if (!items.length) {
-                    btn.parentElement.style.display = 'none';
-                    return;
+    $(document).ready(function () {
+        $("#contactForm").submit(function (e) {
+            e.preventDefault(); // منع إعادة تحميل الصفحة
+
+            var form = $(this);
+            var url = form.attr('action') || '/Contact/Create'; // رابط الأكشن
+
+            $(".loading").show();
+            $("#formStatus").hide().text('');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // يرسل بيانات الفورم
+                success: function (response) {
+                    $(".loading").hide();
+
+                    if (response.success) {
+                        $("#formStatus").show().removeClass('text-danger').addClass('text-success').text(response.message);
+                        form[0].reset(); // إعادة تهيئة الفورم
+                    } else {
+                        let errors = '';
+                        $.each(response.errors, function (key, val) {
+                            errors += val + '<br/>';
+                        });
+                        $("#formStatus").show().removeClass('text-success').addClass('text-danger').html(errors);
+                    }
+                },
+                error: function () {
+                    $(".loading").hide();
+                    $("#formStatus").show().removeClass('text-success').addClass('text-danger').text('حدث خطأ أثناء إرسال الرسالة.');
                 }
-                items.forEach(it => {
-                    const div = document.createElement('div');
-                    div.className = 'client-item';
-                    const imgSrc = it.image ? it.image : '/assets/img/clients/placeholder.png';
-                    div.innerHTML = `<img src="${imgSrc}" class="img-fluid" alt="${it.name}" />`;
-                    wrapper.appendChild(div);
-                });
-                const newSkip = skip + items.length;
-                btn.setAttribute('data-skip', newSkip);
-                if (newSkip >= total) {
-                    btn.parentElement.style.display = 'none';
-                } else {
-                    btn.disabled = false;
-                    btn.textContent = 'Load more';
-                }
-            } catch (err) {
-                console.error(err);
-                btn.disabled = false;
-                btn.textContent = 'Load more';
-                alert('Error loading more clients.');
-            }
+            });
         });
-    }
+    });
 </script>

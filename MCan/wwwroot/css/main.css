@@ -1831,3 +1831,79 @@ nav select {
         flex-direction: row-reverse;
         gap: 15px;
     }
+
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100vh;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    direction: ltr;
+}
+
+    .loader span {
+        display: inline-block;
+        font-size: 2.5rem;
+        font-weight: bold;
+        animation: wave 1s infinite;
+    }
+
+        .loader span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loader span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .loader span:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+
+        .loader span:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+@keyframes wave {
+    0%, 80%, 100% {
+        transform: translateY(0);
+        color: #fff;
+    }
+
+    40% {
+        transform: translateY(-20px);
+        color: var(--accent-color);
+    }
+}
+.navmenu .dropdown select.form-select {
+    min-width: 60px; /* فقط مساحة كافية للعرض */
+    color: #fff; /* النص ظاهر باللون الأبيض */
+    background: transparent;
+    border: none;
+    padding: 0 5px;
+    cursor: pointer;
+    appearance: none; /* لإزالة شكل الـ default arrow */
+}
+
+    /* لإظهار سهم صغير فقط بدل الشكل الافتراضي */
+    .navmenu .dropdown select.form-select::-ms-expand {
+        display: none;
+    }
+
+    .navmenu .dropdown select.form-select option {
+        color: #000; /* لون النص عند فتح الـ dropdown */
+    }
